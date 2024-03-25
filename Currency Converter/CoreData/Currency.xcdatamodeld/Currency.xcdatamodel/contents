@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E214" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDCurrency" representedClassName="CDCurrency" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="decimalDigits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="namePlural" optional="YES" attributeType="String"/>
+        <attribute name="rounding" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="symbolNative" optional="YES" attributeType="String"/>
+        <relationship name="chageFrom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCurrencyChange" inverseName="from" inverseEntity="CDCurrencyChange"/>
+        <relationship name="changeTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCurrencyChange" inverseName="to" inverseEntity="CDCurrencyChange"/>
+    </entity>
+    <entity name="CDCurrencyChange" representedClassName="CDCurrencyChange" syncable="YES" codeGenerationType="class">
+        <attribute name="convertedAmout" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="modifyDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="from" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDCurrency" inverseName="chageFrom" inverseEntity="CDCurrency"/>
+        <relationship name="rate" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDRate" inverseName="change" inverseEntity="CDRate"/>
+        <relationship name="to" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDCurrency" inverseName="changeTo" inverseEntity="CDCurrency"/>
+    </entity>
+    <entity name="CDLatestRates" representedClassName="CDLatestRates" syncable="YES" codeGenerationType="class">
+        <attribute name="currencyCode" optional="YES" attributeType="String"/>
+        <attribute name="modifyDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="rates" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRate" inverseName="lastesRates" inverseEntity="CDRate"/>
+    </entity>
+    <entity name="CDRate" representedClassName="CDRate" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="change" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCurrencyChange" inverseName="rate" inverseEntity="CDCurrencyChange"/>
+        <relationship name="lastesRates" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDLatestRates" inverseName="rates" inverseEntity="CDLatestRates"/>
+    </entity>
+</model>

@@ -1,0 +1,9 @@
+{
+    "quotas": {
+        "month": {
+            "total": 300,
+            "used": 71,
+            "remaining": 229
+        }
+    }
+}
